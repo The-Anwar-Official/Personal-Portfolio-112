@@ -58,8 +58,8 @@ const projectsData: Project[] = [
     longDescription: "A content management system built on WordPress, heavily customized for performance and mobile-first reading experience.",
     category: "WordPress",
     techStack: ["WordPress", "Blogging", "Responsive Design"],
-    github: "",
-    live: "#",
+    github: "https://anwarlearner.blog/",
+    live: "https://anwarlearner.blog/",
     featured: false,
     status: "Live"
   },
@@ -71,7 +71,7 @@ const projectsData: Project[] = [
     category: "Java Core",
     techStack: ["Java", "OOP", "MySQL"],
     github: "https://github.com/The-Anwar-Official",
-    live: "",
+    live: "https://anwarlearner.blog/",
     featured: false,
     status: "Completed"
   },
@@ -85,7 +85,7 @@ const projectsData: Project[] = [
     github: "https://github.com/The-Anwar-Official/TRACER-Scam-Safety-Web",
     live: "",
     featured: false,
-    status: "In Progress"
+    status: "Completed"
   },
   {
     slug: "nexus-gaming",

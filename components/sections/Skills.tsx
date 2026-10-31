@@ -70,10 +70,11 @@ export default function Skills() {
         >
           {skillCategories.map((category, idx) => (
             <motion.div 
-              key={idx} 
-              variants={itemVariants}
-              className="p-6 rounded-2xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)]/50 transition-colors duration-300 group"
-            >
+  key={idx} 
+  variants={itemVariants}
+  className="p-6 rounded-2xl bg-[var(--surface)] border border-[var(--border)] border-dashed hover:border-solid hover:border-[var(--accent)] transition-all duration-300 group relative overflow-hidden"
+>{/* Animated Moving Line (White & Dark mode compatible) */}
+<div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,var(--accent)_50%,transparent_100%)] opacity-0 group-hover:opacity-10 transition-opacity duration-500 animate-[shimmer_2s_infinite]" />
               <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[var(--accent)] group-hover:scale-150 transition-transform duration-300" />
                 {category.title}

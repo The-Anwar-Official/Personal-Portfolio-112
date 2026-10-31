@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { Mail, ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
-import Typewriter from "@/components/Typewriter"; // <-- Import perfectly added
+import { useState, useEffect } from "react";
 
 // Inline SVG for Github
 const GithubIcon = ({ size = 24, ...props }: { size?: number; [key: string]: any }) => (
@@ -22,27 +22,62 @@ const LinkedinIcon = ({ size = 24, ...props }: { size?: number; [key: string]: a
   </svg>
 );
 
+const skills = ["Java", "C", "C++", "PHP", "JavaScript", "TypeScript", "VB.NET", "React", "Node.js", "Android", "MySQL"];
+
+function Typewriter() {
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(100);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    const handleTyping = () => {
+      const i = loopNum % skills.length;
+      const fullText = skills[i];
+
+      if (isDeleting) {
+        setText(fullText.substring(0, text.length - 1));
+        setTypingSpeed(40);
+      } else {
+        setText(fullText.substring(0, text.length + 1));
+        setTypingSpeed(100);
+      }
+
+      if (!isDeleting && text === fullText) {
+        timer = setTimeout(() => setIsDeleting(true), 1200);
+      } else if (isDeleting && text === "") {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      } else {
+        timer = setTimeout(handleTyping, typingSpeed);
+      }
+    };
+
+    timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum, typingSpeed]);
+
+  return (
+    <span className="text-[#e6edf3] border-r-2 border-[#39FF14] pr-1">
+      {text}
+    </span>
+  );
+}
+
 export default function Hero() {
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.1 } },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: [0.17, 0.55, 0.55, 1] as const }
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.17, 0.55, 0.55, 1] as const } },
   };
 
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Background Grid & Glow */}
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]">
         <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-[var(--accent)] opacity-20 blur-[100px]"></div>
       </div>
@@ -50,13 +85,7 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           
-          {/* Left Side: Text Content */}
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="max-w-2xl"
-          >
+          <motion.div variants={containerVariants} initial="hidden" animate="visible" className="max-w-2xl">
             <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--surface-muted)] border border-[var(--border)] text-sm font-medium mb-6">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -74,7 +103,7 @@ export default function Hero() {
             </motion.h1>
 
             <motion.p variants={itemVariants} className="text-lg text-[var(--text-muted)] mb-8 leading-relaxed">
-              MCA student at Star Infotech College. I build scalable backends, 
+              BCA student at Star Infotech College. I build scalable backends, 
               design robust databases, and solve real-world problems using Java, 
               Node.js, and modern web technologies.
             </motion.p>
@@ -83,25 +112,31 @@ export default function Hero() {
               <Link href="/projects" className="flex items-center gap-2 bg-[var(--text)] text-[var(--bg)] px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
                 View Projects <ArrowRight size={18} />
               </Link>
-              <a href="/resume.pdf" className="flex items-center gap-2 border border-[var(--border)] bg-[var(--surface)] px-6 py-3 rounded-lg font-semibold hover:bg-[var(--surface-muted)] transition-colors">
+              
+              {/* AAPKA RESUME LINK YAHAN HAI */}
+              <a href="/Anwar-Resume.pdf" target="_blank" rel="noreferrer" className="flex items-center gap-2 border border-[var(--border)] bg-[var(--surface)] px-6 py-3 rounded-lg font-semibold hover:bg-[var(--surface-muted)] transition-colors">
                 Download Resume <Download size={18} />
               </a>
             </motion.div>
 
             <motion.div variants={itemVariants} className="flex items-center gap-6 mt-10 text-[var(--text-muted)]">
+              {/* AAPKA GITHUB LINK YAHAN HAI */}
               <a href="https://github.com/The-Anwar-Official" target="_blank" rel="noreferrer" className="hover:text-[var(--accent)] transition-colors">
                 <GithubIcon size={24} />
               </a>
+              
+              {/* AAPKA LINKEDIN LINK YAHAN HAI (Apna asli LinkedIn URL yahan daalein agar alag hai) */}
               <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noreferrer" className="hover:text-[var(--accent)] transition-colors">
                 <LinkedinIcon size={24} />
               </a>
-              <a href="mailto:your-email@example.com" className="hover:text-[var(--accent)] transition-colors">
+              
+              {/* AAPKA EMAIL LINK YAHAN HAI (Apna asli email yahan daalein) */}
+              <a href="mailto:mr.an.rough@gmail.com" className="hover:text-[var(--accent)] transition-colors">
                 <Mail size={24} />
               </a>
             </motion.div>
           </motion.div>
 
-          {/* Right Side: Developer Terminal */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -110,7 +145,6 @@ export default function Hero() {
           >
             <div className="w-full max-w-md rounded-xl border border-[var(--border)] bg-[#0d1117] shadow-[0_0_50px_rgba(57,255,20,0.1)] overflow-hidden">
               
-              {/* Terminal Header */}
               <div className="flex items-center gap-2 px-4 py-2 bg-[#161b22] border-b border-[var(--border)]">
                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
@@ -118,7 +152,6 @@ export default function Hero() {
                 <span className="ml-2 text-xs text-[var(--text-muted)] font-mono">anwar@backend:~</span>
               </div>
 
-              {/* Terminal Body */}
               <div className="p-4 font-mono text-sm leading-relaxed">
                 <p className="text-[#39FF14]">$ whoami</p>
                 <p className="text-[var(--text-muted)] mb-2">backend_developer</p>
@@ -134,9 +167,8 @@ export default function Hero() {
                   Available for collaborations
                 </p>
 
-                {/* Naya Dynamic Typing Section */}
                 <p className="text-[#39FF14] mt-2">$ skills --list</p>
-                <div className="text-[var(--text-muted)] flex items-center h-6">
+                <div className="text-[var(--text-muted)] flex items-center min-h-[24px] mt-1">
                   <Typewriter />
                 </div>
 
