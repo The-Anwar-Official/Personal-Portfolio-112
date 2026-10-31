@@ -69,7 +69,6 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Profile Image Placeholder */}
           <motion.div 
             initial="hidden"
             whileInView="visible"
@@ -77,15 +76,28 @@ export default function About() {
             variants={fadeUp}
             className="relative flex justify-center items-center"
           >
-            <div className="w-full max-w-md aspect-square rounded-2xl border-2 border-dashed border-[var(--border)] bg-[var(--surface)] flex flex-col items-center justify-center p-8 text-center">
-              <div className="w-full h-full relative overflow-hidden rounded-2xl">
-                <img src="/profile.png" alt="Anwar" className="object-cover w-full h-full" />
-              </div>
-              {/* <h3 className="font-medium text-lg mb-2">Your Photo Here</h3> */}
-              {/* <p className="text-sm text-[var(--text-muted)]">
-                Replace this placeholder with your professional portrait in the code.
-              </p> */}
-            </div>
+            {/* Profile Image Placeholder ko is code se replace karein */}
+<motion.div 
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, margin: "-100px" }}
+  variants={fadeUp}
+  className="relative flex justify-center items-center"
+>
+  {/* Box styling */}
+  <div className="w-full max-w-md aspect-square rounded-2xl border-2 border-[var(--accent)]/30 bg-[var(--surface)] shadow-[0_0_40px_rgba(57,255,20,0.15)] overflow-hidden relative group">
+    
+    {/* Image Tag */}
+    <img 
+      src="/profile.jpeg" 
+      alt="Anwar - Backend Developer" 
+      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+    />
+
+    {/* Optional: Hover par ek subtle green glow overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-[var(--accent)]/20 to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+  </div>
+</motion.div>
           </motion.div>
         </div>
       </div>
