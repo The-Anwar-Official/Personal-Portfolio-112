@@ -73,7 +73,7 @@ const projectsData: Project[] = [
     github: "https://github.com/The-Anwar-Official",
     live: "https://anwarlearner.blog/",
     featured: false,
-    status: "Completed"
+    status: "Pending"
   },
   {
     slug: "tracer-scam-safety",

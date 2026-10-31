@@ -45,7 +45,7 @@ export const projectsData = [
     github: "https://github.com/The-Anwar-Official",
     live: "",
     featured: false,
-    status: "Completed"
+    status: "Pending"
   },
   {
     slug: "tracer-scam-safety",
