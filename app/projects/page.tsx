@@ -71,7 +71,7 @@ const projectsData: Project[] = [
     category: "Java Core",
     techStack: ["Java", "OOP", "MySQL"],
     github: "https://github.com/The-Anwar-Official",
-    live: "https://anwarlearner.blog/",
+    live: "",
     featured: false,
     status: "Pending"
   },
