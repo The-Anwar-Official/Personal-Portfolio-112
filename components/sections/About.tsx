@@ -89,7 +89,7 @@ export default function About() {
     
     {/* Image Tag */}
     <img 
-      src="/profile.jpeg" 
+      src="/Profile.jpeg" 
       alt="Anwar - Backend Developer" 
       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
     />
